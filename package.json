@@ -1,6 +1,6 @@
 {
     "name": "coinapi-io",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Updated JavaScript Library for CoinAPI.io",
     "main": "coinapi_v2.js",
     "scripts": {
