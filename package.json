@@ -1,0 +1,28 @@
+{
+    "name": "coinapi-io",
+    "version": "1.0.0",
+    "description": "Updated JavaScript Library for CoinAPI.io",
+    "main": "coinapi_v2.js",
+    "scripts": {
+        "doc":
+            "documentation build coinapi_v2.js -f html -o docs --theme node_modules/docjs-theme"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ivan-Istomin/CoinAPI-io.git"
+    },
+    "author": "Ivan Istomin",
+    "license": "MIT",
+    "keywords": [
+        "cryptocurrency",
+        "coin",
+        "coinAPI"
+    ],
+    "bugs": {
+        "url": "https://github.com/Ivan-Istomin/CoinAPI-io/issues"
+    },
+    "homepage": "https://github.com/Ivan-Istomin/CoinAPI-io#readme",
+    "dependencies": {
+        "axios": "^0.18.0"
+    }
+}
