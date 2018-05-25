@@ -2,9 +2,7 @@
  * Rewrited by Ivan Istomin, 2018
  */
 
-"use strict";
-
-import './jsdocsModels';
+let jsdocsModels = require('./jsdocsModels');
 
 // This is to support both browser and node
 if (typeof window !== 'undefined') {
@@ -45,7 +43,7 @@ let transformResponse = axios
  * A class to handle all CoinAPI.io functions
  * @param {String} api_key The api key of customer
  */
-export default class CoinAPI {
+class CoinAPI {
     constructor(api_key) {
         if (api_key === void 0) {
             api_key = null;
@@ -603,6 +601,8 @@ export default class CoinAPI {
             });
     }
 }
+
+module.exports = CoinAPI;
 
 if (typeof window !== 'undefined') {
     window.CoinAPI = CoinAPI;

@@ -3,10 +3,20 @@
 Fully rewrited library for CoinAPI.io on JavaScript. [Documentation for API](https://ivan-istomin.github.io/CoinAPI-io/).
 Get free API key [here](https://www.coinapi.io/pricing?apikey).
 
+[![NPM](https://nodei.co/npm/coinapi-io.png?downloads=true)](https://nodei.co/npm/coinapi-io/)
+
+#### Install
+
+```sh
+~$ npm install coinapi-io --save
+# or
+~$ yarn add coinapi-io --save
+```
+
 #### Example
 
 ```js
-import CoinAPI from 'coinapi_v2';
+import CoinAPI from 'coinapi-io';
 import {subHours} from 'date-fns';
 
 // Init instance from your API

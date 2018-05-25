@@ -1,11 +1,10 @@
 {
     "name": "coinapi-io",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Updated JavaScript Library for CoinAPI.io",
     "main": "coinapi_v2.js",
     "scripts": {
-        "doc":
-            "documentation build coinapi_v2.js -f html -o docs --theme node_modules/docjs-theme"
+        "doc": "documentation build coinapi_v2.js -f html -o docs"
     },
     "repository": {
         "type": "git",
