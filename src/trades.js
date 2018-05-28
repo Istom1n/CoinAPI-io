@@ -9,23 +9,14 @@ export class Trades {
   * @returns {Promise<Trade[]>}
   */
   async latestDataAll (limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + '/v1/trades/latest'
-    let params = {}
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint('/v1/trades/latest'),
+      ...requestProperties(),
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 
   /**
@@ -35,26 +26,13 @@ export class Trades {
   * @returns {Promise<Trade[]>}
   */
   async latestDataSymbol (symbolId, limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-
-    let path = this.url + ('/v1/trades/' + symbolId + '/latest')
-    let params = {}
-
-    if (limit) {
-      params.limit = limit
-    }
-
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/trades/${symbolId}/latest`),
+      ...requestProperties(),
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -66,29 +44,17 @@ export class Trades {
   * @returns {Promise<Trade[]>}
   */
   async historicalData (symbolId, timeStart, timeEnd, limit) {
-    if (timeEnd === void 0) {
-      timeEnd = null
-    }
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + ('/v1/trades/' + symbolId + '/history?time_start=' + timeStart.toISOString())
-    let params = {}
-    if (timeEnd) {
-      params.time = timeEnd.toISOString()
-    }
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/trades/${symbolId}/history`),
+      ...requestProperties(),
+      qs: {
+        time_start: timeStart.toISOString()
+      },
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 }
 

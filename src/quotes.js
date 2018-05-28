@@ -7,11 +7,11 @@ export class Quotes {
   * Get current quotes for all symbols
   * @returns {Promise<Quotes>}
   */
-  async currentDataAll () { 
+  async currentDataAll () {
     return request({
-        url: getEndpoint('/v1/quotes/current'),
-        ...requestProperties()
-      })
+      url: getEndpoint('/v1/quotes/current'),
+      ...requestProperties()
+    })
   }
 
   /**
@@ -20,15 +20,10 @@ export class Quotes {
   * @returns {Promise<Quotes>}
   */
   async currentDataSymbol (symbolId) {
-    let path = this.url + ('/v1/quotes/' + symbolId + '/current')
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/quotes/${symbolId}/current`),
+      ...requestProperties()
+    })
   }
 
   /**
@@ -37,23 +32,13 @@ export class Quotes {
   * @returns {Promise<Quote[]>}
   */
   async latestDataAll (limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + '/v1/quotes/latest'
-    let params = {}
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint('/v1/quotes/latest'),
+      ...requestProperties(),
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -63,23 +48,13 @@ export class Quotes {
   * @returns {Promise<Quote[]>}
   */
   async latestDataSymbol (symbolId, limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + ('/v1/quotes/' + symbolId + '/latest')
-    let params = {}
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/quotes/${symbolId}/latest`),
+      ...requestProperties(),
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -91,29 +66,17 @@ export class Quotes {
   * @returns {Promise<Quote[]>}
   */
   async historicalData (symbolId, timeStart, timeEnd, limit) {
-    if (timeEnd === void 0) {
-      timeEnd = null
-    }
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + ('/v1/quotes/' + symbolId + '/history?time_start=' + timeStart.toISOString())
-    let params = {}
-    if (timeEnd) {
-      params.time = timeEnd.toISOString()
-    }
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/quotes/${symbolId}/history`),
+      ...requestProperties(),
+      qs: {
+        time_start: timeStart.toISOString()
+      },
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 }
 

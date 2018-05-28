@@ -20,16 +20,13 @@ export class OrderBook {
   * @param  {Number=} limitLevels Maximum amount of levels from each side of the book to include in response (optional)
   * @returns {Promise<OrderBook>}
   */
+
   async currentDataSymbol (symbolId, limitLevels) {
-    let path = this.url + ('/v1/orderbooks/' + symbolId + '/current')
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    // TODO Add new limitLevels param
+    return request({
+      url: getEndpoint(`/v1/orderbooks/${symbolId}/current`),
+      ...requestProperties()
+    })
   }
 
   /**
@@ -40,23 +37,14 @@ export class OrderBook {
   * @returns {Promise<OrderBook>}
   */
   async latestData (symbolId, limitLevels, limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + ('/v1/orderbooks/' + symbolId + '/latest')
-    let params = {}
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    // TODO Add new limitLevels param
+    return request({
+      url: getEndpoint(`/v1/orderbooks/${symbolId}/latest`),
+      ...requestProperties(),
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -69,29 +57,18 @@ export class OrderBook {
   * @returns {Promise<OrderBook>}
   */
   async historicalData (symbolId, timeStart, timeEnd, limitLevels, limit) {
-    if (timeEnd === void 0) {
-      timeEnd = null
-    }
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + ('/v1/orderbooks/' + symbolId + '/history?time_start=' + timeStart.toISOString())
-    let params = {}
-    if (timeEnd) {
-      params.time = timeEnd.toISOString()
-    }
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    // TODO Add new limitLevels param
+    return request({
+      url: getEndpoint(`/v1/orderbooks/${symbolId}/history`),
+      ...requestProperties(),
+      qs: {
+        time_start: timeStart.toISOString()
+      },
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 }
 

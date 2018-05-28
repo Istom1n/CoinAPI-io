@@ -9,23 +9,13 @@ export class Twitter {
   * @returns {Promise<Tweet[]>}
   */
   async latestData (limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-    let path = this.url + '/v1/twitter/latest'
-    let params = {}
-    if (limit) {
-      params.limit = limit
-    }
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint('/v1/twitter/latest'),
+      ...requestProperties(),
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -36,36 +26,17 @@ export class Twitter {
   * @returns {Promise<Tweet[]>}
   */
   async historicalData (timeStart, timeEnd, limit) {
-    if (time_end === void 0) {
-      time_end = null
-    }
-
-    if (limit === void 0) {
-      limit = null
-    }
-
-    let path = `${this
-      .url}/v1/twitter/history?time_start=${timeStart
-      .toISOString()}`
-    let params = {}
-
-    if (timeEnd) {
-      params.time = time_end.toISOString()
-    }
-
-    if (limit) {
-      params.limit = limit
-    }
-
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/twitter/history`),
+      ...requestProperties(),
+      qs: {
+        time_start: timeStart.toISOString()
+      },
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 }
 

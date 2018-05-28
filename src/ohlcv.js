@@ -9,9 +9,9 @@ export class OHLCV {
   */
   async listAllPeriods () {
     return request({
-        url: getEndpoint('/v1/ohlcv/periods'),
-        ...requestProperties()
-      })
+      url: getEndpoint('/v1/ohlcv/periods'),
+      ...requestProperties()
+    })
   }
 
   /**
@@ -23,26 +23,16 @@ export class OHLCV {
   * @returns  {Promise<Candlestick[]>}
   */
   async latestData (symbolId, periodId, includeEmptyItems, limit) {
-    if (limit === void 0) {
-      limit = null
-    }
-
-    let path = this.url + (`/v1/ohlcv/${symbolId}/latest?period_id=${periodId}`)
-    let params = {}
-
-    if (limit) {
-      params.limit = limit
-    }
-
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/ohlcv/${symbolId}/latest`),
+      ...requestProperties(),
+      qs: {
+        period_id: periodId
+      },
+      body: {
+        limit
+      }
+    })
   }
 
   /**
@@ -56,36 +46,18 @@ export class OHLCV {
   * @returns  {Promise<Candlestick[]>}
   */
   async historicData (symbolId, periodId, timeStart, timeEnd, includeEmptyItems, limit) {
-    if (timeEnd === void 0) {
-      timeEnd = null
-    }
-
-    if (limit === void 0) {
-      limit = null
-    }
-
-    let path = `${this
-      .url}/v1/ohlcv/${symbolId}/history?period_id=${periodId}&time_start=${timeStart
-      .toISOString()}`
-    let params = {}
-
-    if (timeEnd) {
-      params.time = timeEnd.toISOString()
-    }
-
-    if (limit) {
-      params.limit = limit
-    }
-
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+    return request({
+      url: getEndpoint(`/v1/ohlcv/${symbolId}/history`),
+      ...requestProperties(),
+      qs: {
+        period_id: periodId,
+        time_start: timeStart.toISOString()
+      },
+      body: {
+        time: timeEnd.toISOString(),
+        limit
+      }
+    })
   }
 }
 

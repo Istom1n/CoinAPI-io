@@ -4,32 +4,20 @@ import './utils/jsdocsModels'
 
 export class ExchangeRates {
   /**
-     * Get exchange rate between pair of requested assets at specific or current time.
-     * @param  {String} assetIdBase Requested exchange rate base asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
-     * @param  {String} assetIdQuote Requested exchange rate quote asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
-     * @param  {Date=} time Time at which exchange rate is calculated (optional, if not supplied then current rate is returned)
-     * @returns  {Promise<ExchangeSpecificRate[]>}
-     */
-  async ratesGetSpecificRate (assetIdBase, assetIdQuote, time) {
-    let path = `${this.url}/v1/exchangerate/${assetIdBase}/${assetIdQuote}`
-    let params = {}
-
-    if (time != null) {
-      console.log('not null')
-      params.time = time.toISOString()
-    } else {
-      console.log('null')
-    }
-
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse,
-        params: params
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+  * Get exchange rate between pair of requested assets at specific or current time.
+  * @param  {String} assetIdBase Requested exchange rate base asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
+  * @param  {String} assetIdQuote Requested exchange rate quote asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
+  * @param  {Date=} time Time at which exchange rate is calculated (optional, if not supplied then current rate is returned)
+  * @returns  {Promise<ExchangeSpecificRate[]>}
+  */
+  async getSpecificRate (assetIdBase, assetIdQuote, time) {
+    return request({
+      url: getEndpoint(`/v1/exchangerate/${assetIdBase}/${assetIdQuote}`),
+      ...requestProperties(),
+      body: {
+        time: time.toISOString()
+      }
+    })
   }
 
   /**
@@ -37,16 +25,11 @@ export class ExchangeRates {
      * @param  {String} assetIdBase Requested exchange rate base asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
      * @returns {Promise<ExchangeRate[]>}
      */
-  async ratesGetAllCurrentRates (assetIdBase) {
-    let path = this.url + ('/v1/exchangerate/' + assetIdBase)
-    return axios
-      .get(path, {
-        headers: this.headers,
-        transformResponse: transformResponse
-      })
-      .then(function (resp) {
-        return resp.data
-      })
+  async getAllCurrentRates (assetIdBase) {
+    return request({
+      url: getEndpoint(`/v1/exchangerate/${assetIdBase}`),
+      ...requestProperties()
+    })
   }
 }
 
