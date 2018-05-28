@@ -1,4 +1,5 @@
-import axios from 'axios'
+import request from './utils/request'
+import { getEndpoint, requestProperties } from './api'
 import './utils/jsdocsModels'
 
 export class ExchangeRates {
@@ -9,7 +10,7 @@ export class ExchangeRates {
      * @param  {Date=} time Time at which exchange rate is calculated (optional, if not supplied then current rate is returned)
      * @returns  {Promise<ExchangeSpecificRate[]>}
      */
-  ratesGetSpecificRate (assetIdBase, assetIdQuote, time) {
+  async ratesGetSpecificRate (assetIdBase, assetIdQuote, time) {
     let path = `${this.url}/v1/exchangerate/${assetIdBase}/${assetIdQuote}`
     let params = {}
 
@@ -36,7 +37,7 @@ export class ExchangeRates {
      * @param  {String} assetIdBase Requested exchange rate base asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
      * @returns {Promise<ExchangeRate[]>}
      */
-  ratesGetAllCurrentRates (assetIdBase) {
+  async ratesGetAllCurrentRates (assetIdBase) {
     let path = this.url + ('/v1/exchangerate/' + assetIdBase)
     return axios
       .get(path, {
