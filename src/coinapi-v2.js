@@ -10,9 +10,11 @@ import Quotes from './quotes'
 import OrderBook from './order-book'
 import Twitter from './twitter'
 
+import CoinAPIStreams from './ws/coinapi-v2-websockets'
+
 import './utils/jsdocsModels'
 
-// TODO Support for web
+// TODO Support for Browser
 
 /**
  * A class to handle all CoinAPI.io functions
@@ -38,7 +40,8 @@ async function createCoinAPI (apiKey) {
     trades: new Trades(),
     quotes: new Quotes(),
     orderBook: new OrderBook(),
-    twitter: new Twitter()
+    twitter: new Twitter(),
+    ws: new CoinAPIStreams('wss://ws.coinapi.io/v1/')
   }
 
   return CoinAPI
