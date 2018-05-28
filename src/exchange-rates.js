@@ -14,7 +14,7 @@ export class ExchangeRates {
     return request({
       url: getEndpoint(`/v1/exchangerate/${assetIdBase}/${assetIdQuote}`),
       ...requestProperties(),
-      body: {
+      qs: {
         time: time.toISOString()
       }
     })

@@ -5,12 +5,18 @@ import './utils/jsdocsModels'
 export class OrderBook {
   /**
   * Get current order book snapshot for all symbols
+  * @param  {String=} filterSymbolId Comma or semicolon delimited parts of symbol identifier used to filter response. (optional, full list available [here]{@link CoinAPI#metadata_list_symbols})
+  * @param  {Number=} limitLevels Maximum amount of levels from each side of the book to include in response (optional)
   * @returns {Promise<OrderBook>}
   */
-  async currentDataAll () {
+  async currentDataAll (filterSymbolId, limitLevels) {
     return request({
       url: getEndpoint('/v1/orderbooks/current'),
-      ...requestProperties()
+      ...requestProperties(),
+      qs: {
+        filter_symbol_id: filterSymbolId,
+        limit_levels: limitLevels
+      }
     })
   }
 
@@ -22,10 +28,12 @@ export class OrderBook {
   */
 
   async currentDataSymbol (symbolId, limitLevels) {
-    // TODO Add new limitLevels param
     return request({
       url: getEndpoint(`/v1/orderbooks/${symbolId}/current`),
-      ...requestProperties()
+      ...requestProperties(),
+      qs: {
+        limit_levels: limitLevels
+      }
     })
   }
 
@@ -37,11 +45,11 @@ export class OrderBook {
   * @returns {Promise<OrderBook>}
   */
   async latestData (symbolId, limitLevels, limit) {
-    // TODO Add new limitLevels param
     return request({
       url: getEndpoint(`/v1/orderbooks/${symbolId}/latest`),
       ...requestProperties(),
-      body: {
+      qs: {
+        limit_levels: limitLevels,
         limit
       }
     })
@@ -57,15 +65,13 @@ export class OrderBook {
   * @returns {Promise<OrderBook>}
   */
   async historicalData (symbolId, timeStart, timeEnd, limitLevels, limit) {
-    // TODO Add new limitLevels param
     return request({
       url: getEndpoint(`/v1/orderbooks/${symbolId}/history`),
       ...requestProperties(),
       qs: {
-        time_start: timeStart.toISOString()
-      },
-      body: {
-        time: timeEnd.toISOString(),
+        time_start: timeStart.toISOString(),
+        time_end: timeEnd.toISOString(),
+        limit_levels: limitLevels,
         limit
       }
     })

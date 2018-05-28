@@ -33,7 +33,10 @@ export class Metadata {
   async listSymbols (filterSymbolId) {
     return request({
       url: getEndpoint('/v1/symbols'),
-      ...requestProperties()
+      ...requestProperties(),
+      qs: {
+        filter_symbol_id: filterSymbolId
+      }
     })
   }
 }

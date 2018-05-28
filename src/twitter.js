@@ -5,7 +5,7 @@ import './utils/jsdocsModels'
 export class Twitter {
   /**
   * Get latest tweets related to cryptocurrency markets, returned in time descending order
-  * @param  {Number} limit
+  * @param  {Number} limit Amount of items to return (optional, mininum is 1, maximum is 100000, default value is 100, if the parameter is used then every 100 output items are counted as one request)
   * @returns {Promise<Tweet[]>}
   */
   async latestData (limit) {
@@ -30,10 +30,8 @@ export class Twitter {
       url: getEndpoint(`/v1/twitter/history`),
       ...requestProperties(),
       qs: {
-        time_start: timeStart.toISOString()
-      },
-      body: {
-        time: timeEnd.toISOString(),
+        time_start: timeStart.toISOString(),
+        time_end: timeEnd.toISOString(),
         limit
       }
     })

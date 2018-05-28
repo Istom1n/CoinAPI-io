@@ -1,3 +1,5 @@
+// TODO Return as was what comes back
+
 /** Metadata **/
 
 /** @typedef {('SPOT'|'FUTURES'|'OPTION')} SymbolType */
@@ -11,9 +13,9 @@
 
 /**
  * @typedef {Object} MetadataAsset
- * @property {String} periodId Period identifier, used in other API calls
- * @property {String} lengthSeconds Seconds part of period length
- * @property {Boolean} length_months Months part of period length
+ * @property {String} asset_id Our asset identifier. Superset of the ISO 4217 currency codes standard
+ * @property {String} name Display name of the asset
+ * @property {Boolean} type_is_crypto Boolean value; true for cryptocurrency assets, false otherwise
  */
 
 /**

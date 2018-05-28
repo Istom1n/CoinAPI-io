@@ -27,10 +27,11 @@ export class OHLCV {
       url: getEndpoint(`/v1/ohlcv/${symbolId}/latest`),
       ...requestProperties(),
       qs: {
-        period_id: periodId
+        period_id: periodId,
+        limit
       },
       body: {
-        limit
+        include_empty_items: includeEmptyItems
       }
     })
   }
@@ -51,11 +52,12 @@ export class OHLCV {
       ...requestProperties(),
       qs: {
         period_id: periodId,
-        time_start: timeStart.toISOString()
+        time_start: timeStart.toISOString(),
+        time_end: timeEnd.toISOString(),
+        limit
       },
       body: {
-        time: timeEnd.toISOString(),
-        limit
+        include_empty_items: includeEmptyItems
       }
     })
   }

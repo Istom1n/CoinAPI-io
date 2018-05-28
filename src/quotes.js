@@ -5,17 +5,21 @@ import './utils/jsdocsModels'
 export class Quotes {
   /**
   * Get current quotes for all symbols
+  * @param  {String=} filterSymbolId Comma or semicolon delimited parts of symbol identifier used to filter response. (optional, full list available [here]{@link CoinAPI#metadata_list_symbols})
   * @returns {Promise<Quotes>}
   */
-  async currentDataAll () {
+  async currentDataAll (filterSymbolId) {
     return request({
       url: getEndpoint('/v1/quotes/current'),
-      ...requestProperties()
+      ...requestProperties(),
+      qs: {
+        filter_symbol_id: filterSymbolId
+      }
     })
   }
 
   /**
-  * Get current quotes for a specific symbol.
+  * Get current quotes for a specific symbol
   * @param  {String} symbolId Symbol identifier of requested timeseries (full list available [here]{@link CoinAPI#metadata_list_symbols})
   * @returns {Promise<Quotes>}
   */
@@ -29,13 +33,15 @@ export class Quotes {
   /**
   * Get latest quote updates up to 1 minute ago or get updates for a specific symbol without time limit. Latest data is always returned in time descending order.
   * @param  {Number=} limit Amount of items to return (optional, mininum is 1, maximum is 100000, default value is 100, if the parameter is used then every 100 output items are counted as one request)
+  * @param  {String=} filterSymbolId Comma or semicolon delimited parts of symbol identifier used to filter response. (optional, full list available [here]{@link CoinAPI#metadata_list_symbols})
   * @returns {Promise<Quote[]>}
   */
-  async latestDataAll (limit) {
+  async latestDataAll (limit, filterSymbolId) {
     return request({
       url: getEndpoint('/v1/quotes/latest'),
       ...requestProperties(),
-      body: {
+      qs: {
+        filter_symbol_id: filterSymbolId,
         limit
       }
     })
@@ -51,7 +57,7 @@ export class Quotes {
     return request({
       url: getEndpoint(`/v1/quotes/${symbolId}/latest`),
       ...requestProperties(),
-      body: {
+      qs: {
         limit
       }
     })
@@ -70,10 +76,8 @@ export class Quotes {
       url: getEndpoint(`/v1/quotes/${symbolId}/history`),
       ...requestProperties(),
       qs: {
-        time_start: timeStart.toISOString()
-      },
-      body: {
-        time: timeEnd.toISOString(),
+        time_start: timeStart.toISOString(),
+        time_end: timeEnd.toISOString(),
         limit
       }
     })
