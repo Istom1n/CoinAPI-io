@@ -12,7 +12,7 @@ export class Twitter {
     return request({
       url: getEndpoint('/v1/twitter/latest'),
       ...requestProperties(),
-      body: {
+      qs: {
         limit
       }
     })

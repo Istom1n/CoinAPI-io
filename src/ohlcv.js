@@ -28,10 +28,8 @@ export class OHLCV {
       ...requestProperties(),
       qs: {
         period_id: periodId,
+        include_empty_items: includeEmptyItems,
         limit
-      },
-      body: {
-        include_empty_items: includeEmptyItems
       }
     })
   }
@@ -54,10 +52,8 @@ export class OHLCV {
         period_id: periodId,
         time_start: timeStart.toISOString(),
         time_end: timeEnd.toISOString(),
+        include_empty_items: includeEmptyItems,
         limit
-      },
-      body: {
-        include_empty_items: includeEmptyItems
       }
     })
   }

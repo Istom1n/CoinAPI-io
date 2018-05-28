@@ -13,7 +13,7 @@ export class Trades {
     return request({
       url: getEndpoint('/v1/trades/latest'),
       ...requestProperties(),
-      body: {
+      qs: {
         filter_symbol_id: filterSymbolId,
         limit
       }
