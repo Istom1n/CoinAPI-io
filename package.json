@@ -2,9 +2,19 @@
     "name": "coinapi-io",
     "version": "1.0.2",
     "description": "Updated JavaScript Library for CoinAPI.io",
-    "main": "coinapi_v2.js",
+    "main": "dist/coinapi-v2.commonjs2.js",
     "scripts": {
-        "doc": "documentation build coinapi_v2.js -f html -o docs"
+        "clean": "rimraf dist",
+        "docs": "documentation build src/coinapi-v2.js -f html -o docs",
+        "start": "npm run build",
+        "build": "webpack --progress --color ",
+        "build-watch": "webpack --progress --color --watch",
+        "lint": "standard 'src/**/*.js' 'src/*.js' 'test/**/*.js' 'test/*.js'",
+        "lint-fix": "standard --fix 'src/**/*.js' 'src/*.js' 'test/**/*.js' 'test/*.js'",
+        "test": "jest",
+        "test-watch": "jest --watch",
+        "test-integration": "jest --config integration/jest.config.js",
+        "test-integration-watch": "jest --config integration/jest.config.js --watch"
     },
     "repository": {
         "type": "git",
@@ -22,6 +32,19 @@
     },
     "homepage": "https://github.com/Ivan-Istomin/CoinAPI-io#readme",
     "dependencies": {
-        "axios": "^0.18.0"
+        "axios": "^0.18.0",
+        "babel-runtime": "^6.26.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-minify-webpack-plugin": "^0.3.1",
+        "babel-preset-env": "^1.7.0",
+        "jest": "^23.0.1",
+        "rimraf": "^2.6.2",
+        "standard": "^11.0.1",
+        "watch-http-server": "^0.7.6",
+        "webpack": "^4.9.1",
+        "webpack-dev-server": "^3.1.4",
+        "webpack-node-externals": "^1.7.2"
     }
 }

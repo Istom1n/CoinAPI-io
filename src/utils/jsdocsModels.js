@@ -25,7 +25,6 @@
  * @property {String} asset_id_quote FX Spot quote asset identifier, for derivatives it’s contract underlying (e.g. USD for BTC/USD)
  */
 
-
 /** Exchange rates **/
 
 /**
@@ -41,7 +40,6 @@
  * @property {String} asset_id_base Requested exchange rates base asset identifier. Full list available [here]{@link CoinAPI#metadata_list_assets}
  * @property {ExchangeSpecificRate[]} rates Our identifier of the exchange where symbol is traded
  */
-
 
 /** OHLCV **/
 
@@ -71,7 +69,6 @@
  * @property {Number} trades_count Amount of trades executed inside period range
  */
 
-
 /** Trades **/
 
 /** @typedef {('BUY'|'SELL'|'BUY_ESTIMATED'|'SELL_ESTIMATED'|'UNKNOWN')} TakerType */
@@ -86,7 +83,6 @@
  * @property {Number} size Base asset amount traded in the transaction
  * @property {TakerType} taker_side Aggressor side of the transaction
  */
-
 
 /** Quotes **/
 
@@ -113,7 +109,6 @@
  * @property {Bid[]} bids Best 20 bid levels in order from best to worst
  */
 
-
 /** Twitter **/
 
 /**
@@ -131,5 +126,5 @@
  * @property {Number} in_reply_to_status_id Aggressor side of the transaction
  * @property {UserTwitter} user The user who posted this Tweet. See User data dictionary for complete list of attributes
  * @property {CoordinateTwitter} coordinates Represents the geographic location of this Tweet as reported by the user or client application. The inner coordinates array is formatted as geoJSON (longitude first, then latitude)
- * @property {PlaceTwitter} place 
+ * @property {PlaceTwitter} place
  */
