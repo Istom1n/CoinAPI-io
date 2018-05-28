@@ -4,114 +4,114 @@ export class Quotes {
 /**
      *
      */
-    quotes_current_data_all () {
-        let path = this.url + '/v1/quotes/current'
-        return axios
-          .get(path, {
-            headers: this.headers,
-            transformResponse: transformResponse
-          })
-          .then(function (resp) {
-            return resp.data
-          })
-      }
-    
-      /**
+  currentDataAll () {
+    let path = this.url + '/v1/quotes/current'
+    return axios
+      .get(path, {
+        headers: this.headers,
+        transformResponse: transformResponse
+      })
+      .then(function (resp) {
+        return resp.data
+      })
+  }
+
+  /**
          *
-         * @param  {} symbol_id
+         * @param  {} symbolId
          */
-      quotes_current_data_symbol (symbol_id) {
-        let path = this.url + ('/v1/quotes/' + symbol_id + '/current')
-        return axios
-          .get(path, {
-            headers: this.headers,
-            transformResponse: transformResponse
-          })
-          .then(function (resp) {
-            return resp.data
-          })
-      }
-      /**
+  currentDataSymbol (symbolId) {
+    let path = this.url + ('/v1/quotes/' + symbolId + '/current')
+    return axios
+      .get(path, {
+        headers: this.headers,
+        transformResponse: transformResponse
+      })
+      .then(function (resp) {
+        return resp.data
+      })
+  }
+  /**
          *
          * @param  {} limit
          */
-      quotes_latest_data_all (limit) {
-        if (limit === void 0) {
-          limit = null
-        }
-        let path = this.url + '/v1/quotes/latest'
-        let params = {}
-        if (limit) {
-          params.limit = limit
-        }
-        return axios
-          .get(path, {
-            headers: this.headers,
-            transformResponse: transformResponse,
-            params: params
-          })
-          .then(function (resp) {
-            return resp.data
-          })
-      }
-    
-      /**
+  latestDataAll (limit) {
+    if (limit === void 0) {
+      limit = null
+    }
+    let path = this.url + '/v1/quotes/latest'
+    let params = {}
+    if (limit) {
+      params.limit = limit
+    }
+    return axios
+      .get(path, {
+        headers: this.headers,
+        transformResponse: transformResponse,
+        params: params
+      })
+      .then(function (resp) {
+        return resp.data
+      })
+  }
+
+  /**
          *
-         * @param  {} symbol_id
+         * @param  {} symbolId
          * @param  {} limit
          */
-      quotes_latest_data_symbol (symbol_id, limit) {
-        if (limit === void 0) {
-          limit = null
-        }
-        let path = this.url + ('/v1/quotes/' + symbol_id + '/latest')
-        let params = {}
-        if (limit) {
-          params.limit = limit
-        }
-        return axios
-          .get(path, {
-            headers: this.headers,
-            transformResponse: transformResponse,
-            params: params
-          })
-          .then(function (resp) {
-            return resp.data
-          })
-      }
-    
-      /**
+  latestDataSymbol (symbolId, limit) {
+    if (limit === void 0) {
+      limit = null
+    }
+    let path = this.url + ('/v1/quotes/' + symbolId + '/latest')
+    let params = {}
+    if (limit) {
+      params.limit = limit
+    }
+    return axios
+      .get(path, {
+        headers: this.headers,
+        transformResponse: transformResponse,
+        params: params
+      })
+      .then(function (resp) {
+        return resp.data
+      })
+  }
+
+  /**
          *
-         * @param  {} symbol_id
-         * @param  {} time_start
-         * @param  {} time_end
+         * @param  {} symbolId
+         * @param  {} timeStart
+         * @param  {} timeEnd
          * @param  {} limit
          */
-      quotes_historical_data (symbol_id, time_start, time_end, limit) {
-        if (time_end === void 0) {
-          time_end = null
-        }
-        if (limit === void 0) {
-          limit = null
-        }
-        let path = this.url + ('/v1/quotes/' + symbol_id + '/history?time_start=' + time_start.toISOString())
-        let params = {}
-        if (time_end) {
-          params.time = time_end.toISOString()
-        }
-        if (limit) {
-          params.limit = limit
-        }
-        return axios
-          .get(path, {
-            headers: this.headers,
-            transformResponse: transformResponse,
-            params: params
-          })
-          .then(function (resp) {
-            return resp.data
-          })
-      }
+  historicalData (symbolId, timeStart, timeEnd, limit) {
+    if (timeEnd === void 0) {
+      timeEnd = null
+    }
+    if (limit === void 0) {
+      limit = null
+    }
+    let path = this.url + ('/v1/quotes/' + symbolId + '/history?time_start=' + timeStart.toISOString())
+    let params = {}
+    if (timeEnd) {
+      params.time = timeEnd.toISOString()
+    }
+    if (limit) {
+      params.limit = limit
+    }
+    return axios
+      .get(path, {
+        headers: this.headers,
+        transformResponse: transformResponse,
+        params: params
+      })
+      .then(function (resp) {
+        return resp.data
+      })
+  }
 }
 
 export default Quotes

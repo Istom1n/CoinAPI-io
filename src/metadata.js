@@ -1,7 +1,7 @@
 import './utils/jsdocsModels'
 
 export class Metadata {
-    /**
+  /**
      * Get a detailed list of exchanges provided by the system.
      * @returns {Promise<MetadataExchange[]>}
      */
@@ -37,10 +37,10 @@ export class Metadata {
 
   /**
      * Get detailed list of all symbols.
-     * @param {String=} filter_symbol_id Comma or semicolon delimited parts of symbol identifier used to filter response (optional, full list available [here]{@link CoinAPI#metadata_list_symbols}).
+     * @param {String=} filterSymbolId Comma or semicolon delimited parts of symbol identifier used to filter response (optional, full list available [here]{@link CoinAPI#metadata_list_symbols}).
      * @returns {Promise<MetadataSymbol[]>}
      */
-  listSymbols (filter_symbol_id) {
+  listSymbols (filterSymbolId) {
     let path = this.url + '/v1/symbols'
 
     return axios
